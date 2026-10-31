@@ -1,0 +1,413 @@
+{% extends "base.html" %}
+
+{% block title %}Road Safety Intelligence System | Unified Analytics Platform{% endblock %}
+
+{% block content %}
+<!-- Full-Width Hero Header with Road Accident Awareness Background Video -->
+<div class="hero-video-section position-relative">
+    <!-- Background Awareness Video -->
+    <video autoplay loop muted playsinline id="bgSafetyVideo" class="hero-video-bg">
+        <source src="{{ url_for('static', filename='videos/road_safety_awareness.mp4') }}" type="video/mp4">
+        Your browser does not support HTML5 video streaming.
+    </video>
+    
+    <!-- Dark Cinematic Overlay for High Contrast & Text Legibility -->
+    <div class="hero-video-overlay"></div>
+
+    <!-- Video Control Floating Pill -->
+    <button class="video-control-pill" id="videoToggleBtn" type="button" aria-label="Toggle background awareness video">
+        <i class="bi bi-pause-fill" id="videoToggleIcon"></i>
+        <span id="videoToggleText">Pause Footage</span>
+    </button>
+
+    <!-- Hero Content Layer -->
+    <div class="container-fluid px-lg-5 py-5 hero-content">
+        <div class="row align-items-center g-4 py-3">
+            <!-- Left Column: Title, Subtitle, Description, Action Pills -->
+            <div class="col-lg-7">
+                <h1 class="hero-title mb-2">
+                    <span class="d-block text-white">Road Safety</span>
+                    <span class="d-block hero-title-cyan">Intelligence System</span>
+                </h1>
+                
+                <p class="hero-subtitle mb-3">
+                    Data &bull; AI &bull; Geospatial Analytics for Safer Roads
+                </p>
+
+                <p class="hero-description mb-4">
+                    A unified decision support platform that integrates national crash statistics, real-world traffic telemetry, and geospatial machine learning models to analyze road accidents, identify risk factors, and predict accident severity for safer and smarter transportation systems.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3 pt-1">
+                    <a href="{{ url_for('india_analysis') }}" class="btn-hero-primary">
+                        <i class="bi bi-compass"></i> Explore India Analysis &rarr;
+                    </a>
+                    <a href="{{ url_for('bengaluru_hotspots') }}" class="btn-hero-translucent">
+                        <i class="bi bi-geo-alt"></i> View Bengaluru Hotspots &rarr;
+                    </a>
+                    <a href="{{ url_for('karnataka_analysis') }}" class="btn-hero-translucent">
+                        <i class="bi bi-map"></i> Karnataka Severity &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Column: Glass Stats Card & Glass Quote Card -->
+            <div class="col-lg-5">
+                <!-- Top 4 Stats Glass Card -->
+                <div class="glass-stats-panel p-3 p-xl-4 mb-3">
+                    <div class="row g-2 text-center align-items-center">
+                        <!-- Stat 1 -->
+                        <div class="col-3">
+                            <div class="stat-icon-circle stat-circle-blue mx-auto mb-2">
+                                <i class="bi bi-database"></i>
+                            </div>
+                            <div class="stat-val">3000+</div>
+                            <div class="stat-lbl">National Records</div>
+                            <div class="stat-sub">MoRTH (2018–2023)</div>
+                        </div>
+                        <!-- Stat 2 -->
+                        <div class="col-3">
+                            <div class="stat-icon-circle stat-circle-cyan mx-auto mb-2">
+                                <i class="bi bi-car-front-fill"></i>
+                            </div>
+                            <div class="stat-val">207,617</div>
+                            <div class="stat-lbl">CAS Telemetry Alerts</div>
+                            <div class="stat-sub">BBMP (MoveHack)</div>
+                        </div>
+                        <!-- Stat 3 -->
+                        <div class="col-3">
+                            <div class="stat-icon-circle stat-circle-green mx-auto mb-2">
+                                <i class="bi bi-map"></i>
+                            </div>
+                            <div class="stat-val">300,000+</div>
+                            <div class="stat-lbl">Karnataka Incidents</div>
+                            <div class="stat-sub">KSP (2016–2023)</div>
+                        </div>
+                        <!-- Stat 4 -->
+                        <div class="col-3">
+                            <div class="stat-icon-circle stat-circle-purple mx-auto mb-2">
+                                <i class="bi bi-cpu"></i>
+                            </div>
+                            <div class="stat-val">3</div>
+                            <div class="stat-lbl">AI/ML Models</div>
+                            <div class="stat-sub">Integrated Platform</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Quote Glass Card -->
+                <div class="glass-quote-panel p-3 p-xl-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="quote-circle-icon flex-shrink-0">
+                            <i class="bi bi-quote"></i>
+                        </div>
+                        <div>
+                            <div class="quote-text fst-italic">
+                                &ldquo;Safer Roads.<br>
+                                Smarter Decisions.<br>
+                                Healthier Communities.&rdquo;
+                            </div>
+                            <div class="quote-accent-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Floating White Card Deck Overlapping the Hero -->
+<div class="container-fluid px-lg-5 position-relative mb-5" style="z-index: 20; margin-top: -65px;">
+    <div class="floating-white-deck shadow-lg p-4 p-xl-4 bg-white">
+        <!-- 3 Unified Module Cards Row -->
+        <div class="row g-4">
+            <!-- Module 1: India Road Accident Analysis -->
+            <div class="col-lg-4">
+                <a href="{{ url_for('india_analysis') }}" class="module-feature-card module-card-blue h-100 d-flex flex-column text-decoration-none">
+                    <!-- Subtle India Map Silhouette Watermark -->
+                    <svg class="watermark-svg" viewBox="0 0 100 120" fill="none" stroke="#0284c7" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.14">
+                        <path d="M48,8 L54,16 L51,22 L59,26 L66,22 L73,26 L76,33 L69,38 L63,36 L59,42 L66,48 L61,56 L65,64 L59,72 L55,84 L50,98 L45,86 L41,74 L37,66 L31,58 L29,48 L34,42 L27,37 L30,27 L38,21 L43,11 Z" fill="#0284c7" fill-opacity="0.04" />
+                    </svg>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2 position-relative" style="z-index: 2;">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="module-icon-badge bg-primary text-white">
+                                <i class="bi bi-bar-chart-fill"></i>
+                            </div>
+                            <h3 class="module-card-title mb-0">India Road Accident Analysis</h3>
+                        </div>
+                        <i class="bi bi-chevron-right chevron-blue"></i>
+                    </div>
+
+                    <p class="module-card-desc mb-3 position-relative" style="z-index: 2;">
+                        Analyze 3,000+ national road accident records from MoRTH. Explore trends, risk factors and predict accident severity using machine learning.
+                    </p>
+
+                    <div class="mt-auto d-flex flex-wrap gap-2 position-relative" style="z-index: 2;">
+                        <span class="module-pill pill-blue">ML Prediction</span>
+                        <span class="module-pill pill-blue">National Trends</span>
+                        <span class="module-pill pill-blue">Severity Analysis</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Module 2: Bengaluru Accident Hotspots -->
+            <div class="col-lg-4">
+                <a href="{{ url_for('bengaluru_hotspots') }}" class="module-feature-card module-card-amber h-100 d-flex flex-column text-decoration-none">
+                    <!-- Subtle Bengaluru Skyline / Monument Silhouette Watermark -->
+                    <svg class="watermark-svg" viewBox="0 0 120 100" fill="none" stroke="#d97706" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.14">
+                        <path d="M10,90 L110,90 M20,90 L20,68 L27,68 L27,90 M34,90 L34,56 L44,56 L44,90 M49,90 L49,46 L54,46 L54,32 L60,22 L66,32 L66,46 L71,46 L71,90 M76,90 L76,56 L86,56 L86,90 M93,90 L93,68 L100,68 L100,90 M50,46 C50,38 70,38 70,46 Z" fill="#d97706" fill-opacity="0.04" />
+                    </svg>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2 position-relative" style="z-index: 2;">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="module-icon-badge bg-warning text-white">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <h3 class="module-card-title mb-0">Bengaluru Accident Hotspots</h3>
+                        </div>
+                        <i class="bi bi-chevron-right chevron-amber"></i>
+                    </div>
+
+                    <p class="module-card-desc mb-3 position-relative" style="z-index: 2;">
+                        Analyze 207,617 CAS telemetry alerts from 50 BBMP wards. Identify urban hotspots, high-risk zones and pothole severity using clustering models.
+                    </p>
+
+                    <div class="mt-auto d-flex flex-wrap gap-2 position-relative" style="z-index: 2;">
+                        <span class="module-pill pill-amber">Hotspot Mapping</span>
+                        <span class="module-pill pill-amber">IoT Telemetry</span>
+                        <span class="module-pill pill-amber">Urban Risk</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Module 3: Karnataka Road Accident Severity -->
+            <div class="col-lg-4">
+                <a href="{{ url_for('karnataka_analysis') }}" class="module-feature-card module-card-green h-100 d-flex flex-column text-decoration-none">
+                    <!-- Subtle Karnataka State Outline Watermark -->
+                    <svg class="watermark-svg" viewBox="0 0 100 120" fill="none" stroke="#16a34a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.14">
+                        <path d="M52,14 L64,24 L61,38 L69,48 L66,66 L59,78 L56,96 L46,106 L41,94 L39,78 L36,62 L33,46 L37,32 L45,20 Z" fill="#16a34a" fill-opacity="0.04" />
+                    </svg>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2 position-relative" style="z-index: 2;">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="module-icon-badge bg-success text-white">
+                                <i class="bi bi-map-fill"></i>
+                            </div>
+                            <h3 class="module-card-title mb-0">Karnataka Road Accident Severity</h3>
+                        </div>
+                        <i class="bi bi-chevron-right chevron-green"></i>
+                    </div>
+
+                    <p class="module-card-desc mb-3 position-relative" style="z-index: 2;">
+                        Statewide geospatial analysis of 300,000+ incidents across 30+ districts. Predict severity levels using machine learning and interactive GIS maps.
+                    </p>
+
+                    <div class="mt-auto d-flex flex-wrap gap-2 position-relative" style="z-index: 2;">
+                        <span class="module-pill pill-green">GIS Mapping</span>
+                        <span class="module-pill pill-green">Severity Prediction</span>
+                        <span class="module-pill pill-green">District Analytics</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Bottom 6-Feature Strip -->
+        <div class="mt-4 pt-4 border-top">
+            <div class="row g-3 align-items-center">
+                <!-- 1: Real-World Data -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="feature-strip-icon bg-blue-subtle text-primary">
+                            <i class="bi bi-database"></i>
+                        </div>
+                        <div>
+                            <div class="feature-strip-title">Real-World Data</div>
+                            <div class="feature-strip-sub">Government datasets & telemetry records</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2: Machine Learning -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="feature-strip-icon bg-purple-subtle text-purple">
+                            <i class="bi bi-bar-chart-fill"></i>
+                        </div>
+                        <div>
+                            <div class="feature-strip-title">Machine Learning</div>
+                            <div class="feature-strip-sub">Risk prediction & severity classification</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3: Geospatial Analytics -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="feature-strip-icon bg-green-subtle text-success">
+                            <i class="bi bi-map-fill"></i>
+                        </div>
+                        <div>
+                            <div class="feature-strip-title">Geospatial Analytics</div>
+                            <div class="feature-strip-sub">Interactive maps & spatial insights</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4: Urban Safety -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="feature-strip-icon bg-red-subtle text-danger">
+                            <i class="bi bi-shield-shaded"></i>
+                        </div>
+                        <div>
+                            <div class="feature-strip-title">Urban Safety</div>
+                            <div class="feature-strip-sub">Hotspot detection & risk assessment</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5: Data-Driven Policy -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="feature-strip-icon bg-amber-subtle text-warning-emphasis">
+                            <i class="bi bi-gear-fill"></i>
+                        </div>
+                        <div>
+                            <div class="feature-strip-title">Data-Driven Policy</div>
+                            <div class="feature-strip-sub">Evidence-based decision support</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6: Safer Communities -->
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="feature-strip-icon bg-blue-subtle text-info-emphasis">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div>
+                            <div class="feature-strip-title">Safer Communities</div>
+                            <div class="feature-strip-sub">Towards zero road accident goals</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detailed Project Specifications & Research Architecture Section -->
+<div class="container-fluid px-lg-5 mb-5">
+    <!-- Road Accident Awareness & Golden Hour Protocol Banner -->
+    <div class="card p-3 p-lg-4 mb-4 border-0 awareness-ticker shadow-sm">
+        <div class="row align-items-center g-3">
+            <div class="col-lg-8">
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <span class="badge bg-danger text-white px-2 py-1 small fw-bold text-uppercase">Road Safety Advisory</span>
+                    <strong class="text-slate-900">Golden Hour Protocol & Defensive Driving Discipline</strong>
+                </div>
+                <p class="text-secondary small mb-0">
+                    Emergency medical triage delivered within the first <strong>60 minutes (&ldquo;Golden Hour&rdquo;)</strong> post-crash elevates trauma survival rates by up to <strong>50%</strong>. Adhere to mandatory helmet and seatbelt compliance, avoid overtaking on blind curves, and adjust speed proactively during adverse rain, dense fog, or night travel.
+                </p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <div class="d-inline-flex flex-wrap gap-2 justify-content-lg-end">
+                    <div class="emergency-badge">
+                        <i class="bi bi-telephone-fill text-danger me-1.5"></i>
+                        <span>National Emergency: <strong>112</strong></span>
+                    </div>
+                    <div class="emergency-badge">
+                        <i class="bi bi-hospital-fill text-primary me-1.5"></i>
+                        <span>Ambulance: <strong>108</strong></span>
+                    </div>
+                    <div class="emergency-badge">
+                        <i class="bi bi-signpost-2-fill text-warning me-1.5"></i>
+                        <span>Highway Helpline: <strong>1033</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Architecture & Production Performance -->
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="card p-4 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="h6 fw-bold text-slate-900 mb-0 d-flex align-items-center gap-2">
+                        <i class="bi bi-cpu text-primary"></i> Multi-Tier Scientific Architecture
+                    </h3>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle font-monospace px-3 py-1">Production Verified</span>
+                </div>
+                
+                <div class="row g-3 small text-secondary">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="p-3 bg-light rounded border h-100">
+                            <strong class="text-slate-900 d-block mb-1">
+                                <i class="bi bi-speedometer2 text-primary me-1"></i> Tier 1: National Risk Modeling
+                            </strong>
+                            Evaluates 6 situational parameters (Weather, Road Surface, Lighting, Traffic Control, Vehicle Category, and Speed Limits) with <strong>84.83% verified accuracy</strong>.
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="p-3 bg-light rounded border h-100">
+                            <strong class="text-slate-900 d-block mb-1">
+                                <i class="bi bi-broadcast-pin text-warning me-1"></i> Tier 2: Urban Hotspot Engine
+                            </strong>
+                            Synthesizes 207,617 Collision Avoidance System (CAS) fleet alerts across 50 BBMP municipal wards with <strong>99.99% classification accuracy</strong>.
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="p-3 bg-light rounded border h-100">
+                            <strong class="text-slate-900 d-block mb-1">
+                                <i class="bi bi-geo-alt-fill text-success me-1"></i> Tier 3: Karnataka GIS Ensemble
+                            </strong>
+                            Statewide geospatial model covering 39,051 police collision records (2016–2023) across 31 districts with <strong>80.71% ensemble accuracy</strong>.
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="p-3 bg-light rounded border h-100">
+                            <strong class="text-slate-900 d-block mb-1">
+                                <i class="bi bi-file-earmark-check text-info me-1"></i> Sub-50ms Inference Latency
+                            </strong>
+                            All three inference pipelines are serialized into compact <code>joblib</code> model packages and run in-memory for immediate, reliable decision support.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 pt-3 border-top d-flex flex-wrap justify-content-between align-items-center small text-muted font-monospace">
+                    <span><i class="bi bi-shield-check text-success me-1"></i>High-Integrity Calibrated Decision Pipeline</span>
+                    <span>Python 3.11 &bull; Flask 3.1 &bull; Scikit-Learn 1.6 &bull; GeoPandas &bull; Leaflet.js</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Video play/pause toggle interaction
+    document.addEventListener('DOMContentLoaded', () => {
+        const video = document.getElementById('bgSafetyVideo');
+        const btn = document.getElementById('videoToggleBtn');
+        const icon = document.getElementById('videoToggleIcon');
+        const text = document.getElementById('videoToggleText');
+
+        if (video && btn) {
+            btn.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    icon.className = 'bi bi-pause-fill';
+                    text.textContent = 'Pause Footage';
+                } else {
+                    video.pause();
+                    icon.className = 'bi bi-play-fill';
+                    text.textContent = 'Play Footage';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

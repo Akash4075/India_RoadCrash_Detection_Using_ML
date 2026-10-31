@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}500 - Server Error | RSIS{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+    <div class="card p-5 mx-auto shadow-sm" style="max-width: 540px;">
+        <i class="bi bi-x-circle fs-1 text-danger mb-3"></i>
+        <h1 class="h4 fw-bold text-slate-900 mb-2">500 - Server Error</h1>
+        <p class="text-secondary small mb-4">An unexpected server error occurred while processing the road safety telemetry.</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-sm fw-semibold">
+            <i class="bi bi-house me-1"></i> Return to Welcome Page
+        </a>
+    </div>
+</div>
+{% endblock %}

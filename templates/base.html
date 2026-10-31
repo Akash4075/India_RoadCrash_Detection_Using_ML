@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Road Safety Intelligence System{% endblock %}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <!-- Top Navigation Bar matching reference design -->
+    <header class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm py-2" style="background-color: #080e1e; border-bottom: 1px solid rgba(255,255,255,0.08);">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('index') }}">
+                <span class="d-inline-flex align-items-center justify-content-center rounded text-white px-2 py-1" style="background-color: #0070f3;">
+                    <i class="bi bi-shield-shaded fs-6"></i>
+                </span>
+                <span class="fw-bold tracking-wide text-white" style="font-size: 1.05rem;">Road Safety Intelligence</span>
+                <span class="badge border ms-1 d-none d-sm-inline font-monospace" style="background: rgba(255,255,255,0.08); color: #cbd5e1; border-color: rgba(255,255,255,0.18) !important; font-size: 0.70rem; border-radius: 12px; padding: 3px 8px;">RSIS v1.0</span>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <nav class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-2 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-1 d-inline-flex align-items-center {% if active_page == 'home' %}nav-link-active{% endif %}" 
+                           href="{{ url_for('index') }}">
+                            <i class="bi bi-house-door-fill me-1.5"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-1 d-inline-flex align-items-center {% if active_page == 'india' %}nav-link-active{% endif %}"
+                           href="{{ url_for('india_analysis') }}">
+                            <i class="bi bi-flag me-1.5"></i> India Risk Analysis
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-1 d-inline-flex align-items-center {% if active_page == 'bengaluru' %}nav-link-active{% endif %}"
+                           href="{{ url_for('bengaluru_hotspots') }}">
+                            <i class="bi bi-geo-alt me-1.5"></i> Bengaluru Hotspots
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-1 d-inline-flex align-items-center {% if active_page == 'karnataka' %}nav-link-active{% endif %}"
+                           href="{{ url_for('karnataka_analysis') }}">
+                            <i class="bi bi-map me-1.5"></i> Karnataka Severity
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+        <div id="appToast" class="toast align-items-center text-bg-primary border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">Notification</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-4 mt-auto border-top border-slate-800">
+        <div class="container-fluid px-lg-4">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-1 text-white fw-semibold">Road Safety Intelligence System (RSIS)</p>
+                    <p class="small mb-0 text-slate-400">Integrated Decision Support Platform unifying National, Urban, and Statewide road accident telemetry and predictive models.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end small">
+                    <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-3 text-slate-400">
+                        <span><i class="bi bi-database me-1"></i>MoRTH India (2018–2023)</span>
+                        <span><i class="bi bi-broadcast me-1"></i>NITI Aayog MoveHack</span>
+                        <span><i class="bi bi-shield-check me-1"></i>Enterprise Decision Platform</span>
+                    </div>
+                    <div class="mt-2 text-slate-500 font-monospace" style="font-size: 0.75rem;">
+                        Python 3.11 &bull; Flask &bull; Scikit-Learn &bull; GeoPandas &bull; Leaflet.js
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Custom Application JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
